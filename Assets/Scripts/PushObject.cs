@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PushObject : MonoBehaviour
 {
-    public float pushForce = 5f; // Snaga kojom se objekt gura
+    public float pushForce = 10f; // Snaga kojom se objekt gura
     private Rigidbody rb;
 
     void Start()
@@ -12,7 +12,7 @@ public class PushObject : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void OnCollisionStay(Collision collision)
+    void FixedUpdate()
     {
         // Preuzmi ulaz korisnika (kretanje)
         float horizontal = Input.GetAxis("Horizontal");
@@ -21,7 +21,7 @@ public class PushObject : MonoBehaviour
         // Izračunaj silu guranja
         Vector3 force = new Vector3(horizontal, 0, vertical) * pushForce;
 
-        // Primijeni silu na stolicu bez obzira tko je gura
+        // Primijeni silu na stolicu
         rb.AddForce(force, ForceMode.Force);
     }
 }
